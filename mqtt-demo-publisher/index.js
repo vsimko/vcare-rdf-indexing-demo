@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const mqtt = require('mqtt')
-const client  = mqtt.connect('mqtt://test.mosquitto.org/')
+//const client  = mqtt.connect('mqtt://test.mosquitto.org/')
+const client  = mqtt.connect('mqtt://localhost:1883/')
 
 client.on('connect', function () {
 
