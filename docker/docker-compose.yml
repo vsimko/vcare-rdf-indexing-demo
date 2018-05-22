@@ -1,10 +1,11 @@
 version: '2'
 
 services:
-  solr:
 
-    # see also https://hub.docker.com/_/solr/
+  # see also https://hub.docker.com/_/solr/
+  solr:
     image: solr:alpine
+    container_name: vcare-solr
 
     ports:
      - "8983:8983"
@@ -16,6 +17,26 @@ services:
       - docker-entrypoint.sh
       - solr-precreate
       - mycore
+
+  # see also https://hub.docker.com/_/eclipse-mosquitto/
+  mqtt:
+    image: eclipse-mosquitto:latest
+    container_name: vcare-mqtt
+    #restart: always
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mqtt/config:/mosquitto/config
+      - ./mqtt/data:/mosquitto/data
+      - ./mqtt/log:/mosquitto/log
+
+  graphdb:
+    image: ontotext/graphdb:8.0.4-se
+    container_name: vcare-graphdb
+    ports:
+      - 7200:7200
+    volumes:
+      - ./graphdb-home:/opt/graphdb/home
 
 volumes:
   data:
