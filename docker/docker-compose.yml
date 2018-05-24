@@ -27,9 +27,10 @@ services:
     ports:
       - "1883:1883"
     volumes:
-      - ./mqtt/config:/mosquitto/config
-      - ./mqtt/data:/mosquitto/data
-      - ./mqtt/log:/mosquitto/log
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+#      - ./mqtt/config:/mosquitto/config
+#      - ./mqtt/data:/mosquitto/data
+#      - ./mqtt/log:/mosquitto/log
 
   graphdb:
     image: ontotext/graphdb:8.0.4-se
