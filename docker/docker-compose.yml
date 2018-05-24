@@ -11,12 +11,13 @@ services:
      - "8983:8983"
 
     volumes:
-      - data:/opt/solr/server/solr/mycores
+      - ./solr-data:/opt/solr/server/solr/mycores
 
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - mycore
+      - timelines
+
 
   # see also https://hub.docker.com/_/eclipse-mosquitto/
   mqtt:
@@ -37,6 +38,3 @@ services:
       - 7200:7200
     volumes:
       - ./graphdb-home:/opt/graphdb/home
-
-volumes:
-  data:
