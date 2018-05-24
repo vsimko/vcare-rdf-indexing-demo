@@ -1,0 +1,1022 @@
+# baseURI: http://vcare.eu/demonstrator
+# imports: http://datashapes.org/dash
+# prefix: demonstrator
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix demonstrator: <http://vcare.eu/demonstrator#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://vcare.eu/demonstrator>
+  rdf:type owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+demonstrator:AboveAverageHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:AboveAverageHRCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Above average HR" ;
+.
+demonstrator:AboveAverageHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: 66.0 - 69.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Above average HRCondition" ;
+.
+demonstrator:Activity
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Activity" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasDuration ;
+      sh:datatype xsd:dateTime ;
+      sh:name "has duration" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasEffect ;
+      sh:class demonstrator:Effect ;
+      sh:minCount 1 ;
+      sh:name "has effect" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+demonstrator:Aerobic
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBMI ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  demonstrator:hasEffect demonstrator:IncreaseBloodPressure ;
+  rdfs:label "Aerobic" ;
+.
+demonstrator:Affiliation
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Affiliation" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasCity ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has city" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasCountry ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has country" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasPostalCode ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has postal code" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasStreet ;
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:name "has street" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasStreetNumber ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has street number" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:memberOf ;
+      sh:class demonstrator:Hospital ;
+      sh:name "member of" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+demonstrator:Alzheimers
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Alzheimers" ;
+.
+demonstrator:Amblyopia
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Amblyopia" ;
+.
+demonstrator:AthleteHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:AthleteHRCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Athlete HR" ;
+.
+demonstrator:AthleteHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: 49.0 - 57.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Athlete HRCondition" ;
+.
+demonstrator:AverageHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:AverageHRCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Average HR" ;
+.
+demonstrator:AverageHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: 70.0 - 76.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Average HRCondition" ;
+.
+demonstrator:BMI
+  rdf:type demonstrator:ObservationFeature ;
+  demonstrator:featureType demonstrator:Numerical ;
+  demonstrator:hasRangeEnd 45.0 ;
+  demonstrator:hasRangeStart 15.0 ;
+  demonstrator:hasUnit "kg/m^2" ;
+  rdfs:label "BMI" ;
+.
+demonstrator:BallSport
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBMI ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  demonstrator:hasEffect demonstrator:IncreaseBloodPressure ;
+  demonstrator:hasEffect demonstrator:IncreaseBodyTemperature ;
+  rdfs:label "Ball sport" ;
+.
+demonstrator:BelowAverageHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:BelowAverageHRCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Below average HR" ;
+.
+demonstrator:BelowAverageHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: 74.0 - 83.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Below average HRCondition" ;
+.
+demonstrator:BodyTemperature
+  rdf:type demonstrator:ObservationFeature ;
+  demonstrator:featureType demonstrator:Numerical ;
+  demonstrator:hasRangeEnd 45.0 ;
+  demonstrator:hasRangeStart "0"^^xsd:decimal ;
+  demonstrator:hasUnit "°C" ;
+  rdfs:label "Body temperature" ;
+.
+demonstrator:Cardiologist
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Cardiologist" ;
+  rdfs:subClassOf demonstrator:Physician ;
+.
+demonstrator:Cholesterol
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Cholesterol" ;
+.
+demonstrator:ClinicalPathway
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Clinical pathway" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+demonstrator:Condition
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Condition" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasConditionExpression ;
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:name "has condition expression" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasObservationFeature ;
+      sh:class demonstrator:ObservationFeature ;
+      sh:minCount 1 ;
+      sh:name "has observation feature" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+demonstrator:Convert
+  rdf:type demonstrator:Impact ;
+  rdfs:label "Convert" ;
+.
+demonstrator:Cycling
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBMI ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  demonstrator:hasEffect demonstrator:IncreaseBloodPressure ;
+  demonstrator:hasEffect demonstrator:IncreaseBodyTemperature ;
+  rdfs:label "Cycling" ;
+.
+demonstrator:Decrease
+  rdf:type demonstrator:Impact ;
+  rdfs:label "Decrease" ;
+.
+demonstrator:DecreaseBMI
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Decrease ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  demonstrator:hasRangeImpact 1.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseBMI demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseBMI.
+{?agent demonstrator:isInState demonstrator:Underweight.} UNION {?agent demonstrator:isInState demonstrator:NormalBMI.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseBMI demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseBMI.
+{?agent demonstrator:isInState demonstrator:Overweight.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:Obese1.}
+UNION
+{?agent demonstrator:isInState demonstrator:Obese2.}
+UNION
+{?agent demonstrator:isInState demonstrator:ExtremelyObese.}
+}""" ;
+  rdfs:label "Decrease BMI" ;
+.
+demonstrator:DecreaseBloodPressure
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Increase ;
+  demonstrator:hasObservationFeature demonstrator:DiastolicValue ;
+  demonstrator:hasObservationFeature demonstrator:SystolicValue ;
+  demonstrator:hasRangeImpact 50.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseBloodPressure demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseBloodPressure.
+?agent demonstrator:isInState demonstrator:LowBloodPressure.
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseBloodPressure demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseBloodPressure.
+{?agent demonstrator:isInState demonstrator:HighBloodPressure.} UNION {?agent demonstrator:isInState demonstrator:PreHighBloodpressure.}
+}""" ;
+  rdfs:label "Increase systolic value" ;
+.
+demonstrator:DecreaseBodyTemperature
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Decrease ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  demonstrator:hasRangeImpact 1.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseBodyTemperature demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseBodyTemperature.
+{?agent demonstrator:isInState demonstrator:NormalBodyTemperature.}
+UNION
+{?agent demonstrator:isInState demonstrator:Hypothermia.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseBodyTemperature demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseBodyTemperature.
+{?agent demonstrator:isInState demonstrator:Fever.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:Hyperpyrexia.}
+UNION
+{?agent demonstrator:isInState demonstrator:Hyperthermia.}
+}""" ;
+  rdfs:label "Decrease body temperature" ;
+.
+demonstrator:DecreaseHR
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Decrease ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  demonstrator:hasRangeImpact 10.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseHR demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseHR.
+{?agent demonstrator:isInState demonstrator:AboveAverageHR.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:AverageHR.}
+UNION
+{?agent demonstrator:isInState demonstrator:AthleteHR.}
+UNION
+{?agent demonstrator:isInState demonstrator:ExcellentHR.}
+UNION
+{?agent demonstrator:isInState demonstrator:GoodHR.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseHR demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseHR.
+{?agent demonstrator:isInState demonstrator:PoorHR.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:BelowAverageHR.}
+}""" ;
+  rdfs:label "Decrease HR" ;
+.
+demonstrator:DecreaseSPO2
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Decrease ;
+  demonstrator:hasObservationFeature demonstrator:SPO2 ;
+  demonstrator:hasRangeImpact 5.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:DecreaseSPO2 demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:DecreaseSPO2.
+}""" ;
+  rdfs:label "Decrease SPO2" ;
+.
+demonstrator:DiabetesMellitusType2
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Diabetes mellitus type2" ;
+.
+demonstrator:DiastolicValue
+  rdf:type demonstrator:ObservationFeature ;
+  demonstrator:featureType demonstrator:Numerical ;
+  demonstrator:hasRangeEnd "100"^^xsd:decimal ;
+  demonstrator:hasRangeStart "40"^^xsd:decimal ;
+  demonstrator:hasUnit "mmHg" ;
+  rdfs:label "Diastolic value" ;
+.
+demonstrator:Disease
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Disease" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+demonstrator:Effect
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Effect" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasImpact ;
+      sh:class demonstrator:Impact ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has impact" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasObservationFeature ;
+      sh:class demonstrator:ObservationFeature ;
+      sh:minCount 1 ;
+      sh:name "has observation feature" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasRangeImpact ;
+      sh:datatype xsd:decimal ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has range impact" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasRule ;
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:name "has rule" ;
+    ] ;
+.
+demonstrator:Event
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Event" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasObservationFeature ;
+      sh:class demonstrator:ObservationFeature ;
+      sh:name "has observation feature" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasPublisher ;
+      sh:class demonstrator:Sensor ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has publisher" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasTimestamp ;
+      sh:datatype xsd:dateTime ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has timestamp" ;
+    ] ;
+.
+demonstrator:ExcellentHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:ExcellentHRCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Excellent HR" ;
+.
+demonstrator:ExcellentHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: 55.0 - 63.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Excellent HRCondition" ;
+.
+demonstrator:ExtremelyObese
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:ExtremelyObeseCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Extremely obese" ;
+.
+demonstrator:ExtremelyObeseCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BMI: >= 40.0" ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  rdfs:label "Extremely obese condition" ;
+.
+demonstrator:FeatureType
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Feature type" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+demonstrator:Female
+  rdf:type demonstrator:Gender ;
+  rdfs:label "Female" ;
+.
+demonstrator:Fever
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:FeverCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Fever" ;
+.
+demonstrator:FeverCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BodyTemperature: > 37.5" ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  rdfs:label "Fever condition" ;
+.
+demonstrator:Gender
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Gender" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+demonstrator:GoodHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:GoodHRCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Good HR" ;
+.
+demonstrator:GoodHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: 62.0 - 67.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Good HRCondition" ;
+.
+demonstrator:HearingImpairment
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Hearing impairment" ;
+.
+demonstrator:HeartAttack
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Heart attack" ;
+.
+demonstrator:HeartRate
+  rdf:type demonstrator:ObservationFeature ;
+  demonstrator:featureType demonstrator:Numerical ;
+  demonstrator:hasRangeEnd "200"^^xsd:decimal ;
+  demonstrator:hasRangeStart "50"^^xsd:decimal ;
+  demonstrator:hasUnit "bpm" ;
+  rdfs:label "Heart rate" ;
+.
+demonstrator:HighBloodpressure
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:HighBloodpressureCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "High bloodpressure" ;
+.
+demonstrator:HighBloodpressureCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "DiastolicValue: >= 90" ;
+  demonstrator:hasConditionExpression "SystolicValue: >= 140" ;
+  demonstrator:hasObservationFeature demonstrator:DiastolicValue ;
+  demonstrator:hasObservationFeature demonstrator:SystolicValue ;
+  rdfs:label "High bloodpressure condition" ;
+.
+demonstrator:Hospital
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Hospital" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+demonstrator:Hyperpyrexia
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:HyperpyrexiaCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Hyperpyrexia" ;
+.
+demonstrator:HyperpyrexiaCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BodyTemperature: > 40.0" ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  rdfs:label "Hyperpyrexia condition" ;
+.
+demonstrator:Hyperthermia
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:HyperthermiaCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Hyperthermia" ;
+.
+demonstrator:HyperthermiaCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BodyTemperature: 38.3 - 40.0" ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  rdfs:label "Hyperthermia condition" ;
+.
+demonstrator:Hypothermia
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:HypothermiaCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Hypothermia" ;
+.
+demonstrator:HypothermiaCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "Hypothermia: < 35.0" ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  rdfs:label "Hypothermia condition" ;
+.
+demonstrator:IdealBloodpressure
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:IdealBloodpressureCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Ideal bloodpressure" ;
+.
+demonstrator:IdealBloodpressureCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "DiastolicValue: 60 - 80" ;
+  demonstrator:hasConditionExpression "SystolicValue: 90 - 120" ;
+  demonstrator:hasObservationFeature demonstrator:DiastolicValue ;
+  demonstrator:hasObservationFeature demonstrator:SystolicValue ;
+  rdfs:label "Ideal bloodpressure condition" ;
+.
+demonstrator:Impact
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Impact" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+demonstrator:Increase
+  rdf:type demonstrator:Impact ;
+  rdfs:label "Increase" ;
+.
+demonstrator:IncreaseBMI
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Increase ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  demonstrator:hasRangeImpact 1.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseBMI demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseBMI.
+{?agent demonstrator:isInState demonstrator:Overweight.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:Obese1.}
+UNION
+{?agent demonstrator:isInState demonstrator:Obese2.}
+UNION
+{?agent demonstrator:isInState demonstrator:ExtremelyObese.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseBMI demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseBMI.
+{?agent demonstrator:isInState demonstrator:Underweight.}
+}""" ;
+  rdfs:label "Increase BMI" ;
+.
+demonstrator:IncreaseBloodPressure
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Increase ;
+  demonstrator:hasObservationFeature demonstrator:DiastolicValue ;
+  demonstrator:hasObservationFeature demonstrator:SystolicValue ;
+  demonstrator:hasRangeImpact "10"^^xsd:decimal ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseBloodPressure demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseBloodPressure.
+{?agent demonstrator:isInState demonstrator:HighBloodPressure.} UNION {?agent demonstrator:isInState demonstrator:PreHighBloodpressure.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseBloodPressure demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseBloodPressure.
+?agent demonstrator:isInState demonstrator:LowBloodPressure.
+}""" ;
+  rdfs:label "Increase diastolic value" ;
+.
+demonstrator:IncreaseBodyTemperature
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Increase ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  demonstrator:hasRangeImpact 1.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseBodyTemperature demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseBodyTemperature.
+{?agent demonstrator:isInState demonstrator:Fever.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:Hyperpyrexia.}
+UNION
+{?agent demonstrator:isInState demonstrator:Hyperthermia.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseBodyTemperature demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseBodyTemperature.
+{?agent demonstrator:isInState demonstrator:Hypothermia.}
+}""" ;
+  rdfs:label "Increase body temperature" ;
+.
+demonstrator:IncreaseHR
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Increase ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  demonstrator:hasRangeImpact 5.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseHR demonstrator:hasReward \"-1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseHR.
+{?agent demonstrator:isInState demonstrator:PoorHR.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:BelowAverageHR.}
+}""" ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseHR demonstrator:hasReward \"0.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseHR.
+{?agent demonstrator:isInState demonstrator:AboveAverageHR.} 
+UNION 
+{?agent demonstrator:isInState demonstrator:AverageHR.}
+UNION
+{?agent demonstrator:isInState demonstrator:AthleteHR.}
+UNION
+{?agent demonstrator:isInState demonstrator:ExcellentHR.}
+UNION
+{?agent demonstrator:isInState demonstrator:GoodHR.}
+}""" ;
+  rdfs:label "Increase HR" ;
+.
+demonstrator:IncreaseSPO2
+  rdf:type demonstrator:Effect ;
+  demonstrator:hasImpact demonstrator:Increase ;
+  demonstrator:hasObservationFeature demonstrator:SPO2 ;
+  demonstrator:hasRangeImpact 5.0 ;
+  demonstrator:hasRule """CONSTRUCT {demonstrator:IncreaseSPO2 demonstrator:hasReward \"1.0\"^^xsd:double.}
+WHERE {
+?agent demonstrator:performsActivity ?activity.
+?activity demonstrator:hasEffect demonstrator:IncreaseSPO2.
+}""" ;
+  rdfs:label "Increase SPO2" ;
+.
+demonstrator:JonDoe
+  rdf:type demonstrator:PatientProfile ;
+  demonstrator:hasBodyHeight "179"^^xsd:decimal ;
+  demonstrator:hasDisease demonstrator:Stroke ;
+  demonstrator:hasGender demonstrator:Male ;
+  rdfs:label "Jon doe" ;
+.
+demonstrator:LowBloodpressure
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:LowBloodpressureCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Low bloodpressure" ;
+.
+demonstrator:LowBloodpressureCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "DiastolicValue < 60" ;
+  demonstrator:hasConditionExpression "SystolicValue: < 90" ;
+  demonstrator:hasObservationFeature demonstrator:DiastolicValue ;
+  demonstrator:hasObservationFeature demonstrator:SystolicValue ;
+  rdfs:label "Low bloodpressure condition" ;
+.
+demonstrator:Male
+  rdf:type demonstrator:Gender ;
+  rdfs:label "Male" ;
+.
+demonstrator:MultipleSclerosis
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Multiple sclerosis" ;
+.
+demonstrator:Neurologist
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Neurologist" ;
+  rdfs:subClassOf demonstrator:Physician ;
+.
+demonstrator:Nominal
+  rdf:type demonstrator:FeatureType ;
+  rdfs:label "Nominal" ;
+.
+demonstrator:NormalBMI
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:NormalBMICondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Normal BMI" ;
+.
+demonstrator:NormalBMICondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BMI: 18.5 - 24.9" ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  rdfs:label "Normal BMICondition" ;
+.
+demonstrator:NormalBodyTemperature
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:NormalBodyTemperatureCondition ;
+  demonstrator:isTargetState "true"^^xsd:boolean ;
+  rdfs:label "Normal body temperature" ;
+.
+demonstrator:NormalBodyTemperatureCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BodyTemperature: 36.5 - 37.5" ;
+  demonstrator:hasObservationFeature demonstrator:BodyTemperature ;
+  rdfs:label "Normal body temperature condition" ;
+.
+demonstrator:Numerical
+  rdf:type demonstrator:FeatureType ;
+  rdfs:label "Numerical" ;
+.
+demonstrator:Obese1
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:Obese1Condition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Obese1" ;
+.
+demonstrator:Obese1Condition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BMI: 30.0 - 34.9" ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  rdfs:label "Obese1Condition" ;
+.
+demonstrator:Obese2
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:Obsese2Condition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Obese2" ;
+.
+demonstrator:ObservationFeature
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Observation feature" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:featureType ;
+      sh:class demonstrator:FeatureType ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "feature type" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasRangeEnd ;
+      sh:datatype xsd:decimal ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has range end" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasRangeStart ;
+      sh:datatype xsd:decimal ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has range start" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasUnit ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has unit" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasValue ;
+      sh:datatype xsd:decimal ;
+      sh:maxCount 1 ;
+      sh:name "has value" ;
+    ] ;
+.
+demonstrator:Obsese2Condition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BMI: 35.0 - 39.9" ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  rdfs:label "Obsese2Condition" ;
+.
+demonstrator:Ordinal
+  rdf:type demonstrator:FeatureType ;
+  rdfs:label "Ordinal" ;
+.
+demonstrator:Overweight
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:OverweightCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Overweight" ;
+.
+demonstrator:OverweightCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BMI: 25.0 - 29.9" ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  rdfs:label "Overweight condition" ;
+.
+demonstrator:Parkinson
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Parkinson" ;
+.
+demonstrator:PatientProfile
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Patient profile" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasBodyHeight ;
+      sh:datatype xsd:decimal ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has body height" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasDisease ;
+      sh:class demonstrator:Disease ;
+      sh:name "has disease" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasGender ;
+      sh:class demonstrator:Gender ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "has gender" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+demonstrator:Physician
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Physician" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasAffiliation ;
+      sh:class demonstrator:Affiliation ;
+      sh:name "has affiliation" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasDegree ;
+      sh:datatype xsd:string ;
+      sh:name "has degree" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:hasNumberOfPatients ;
+      sh:datatype xsd:integer ;
+      sh:name "has number of patients" ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:isExpertInDisease ;
+      sh:class demonstrator:Disease ;
+      sh:name "is expert in disease" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:treatsPatient ;
+      sh:class demonstrator:PatientProfile ;
+      sh:name "treats patient" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+demonstrator:PoorHR
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:PoorHRCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Poor HR" ;
+.
+demonstrator:PoorHRCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "HeartRate: > 82.0" ;
+  demonstrator:hasObservationFeature demonstrator:HeartRate ;
+  rdfs:label "Poor HRCondition" ;
+.
+demonstrator:PreHighBloodpressure
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:PreHighBloodpressureCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Pre high bloodpressure" ;
+.
+demonstrator:PreHighBloodpressureCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "DiastolicValue: 81 - 90" ;
+  demonstrator:hasConditionExpression "SystolicValue: 121 - 139" ;
+  demonstrator:hasObservationFeature demonstrator:DiastolicValue ;
+  demonstrator:hasObservationFeature demonstrator:SystolicValue ;
+  rdfs:label "Pre high bloodpressure condition" ;
+.
+demonstrator:PulseOximeter
+  rdf:type demonstrator:Sensor ;
+  demonstrator:hasObservationFeature demonstrator:SPO2 ;
+  rdfs:label "Pulse oximeter" ;
+.
+demonstrator:Relaxing
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBloodPressure ;
+  demonstrator:hasEffect demonstrator:DecreaseBodyTemperature ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  rdfs:label "Relaxing" ;
+.
+demonstrator:Running
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBMI ;
+  demonstrator:hasEffect demonstrator:DecreaseBloodPressure ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  demonstrator:hasEffect demonstrator:IncreaseBodyTemperature ;
+  rdfs:label "Running" ;
+.
+demonstrator:SPO2
+  rdf:type demonstrator:ObservationFeature ;
+  demonstrator:featureType demonstrator:Numerical ;
+  demonstrator:hasRangeEnd 100.0 ;
+  demonstrator:hasRangeStart 0.0 ;
+  demonstrator:hasUnit "%" ;
+  rdfs:label "SPO2" ;
+.
+demonstrator:Sensor
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Sensor" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasObservationFeature ;
+      sh:class demonstrator:ObservationFeature ;
+      sh:minCount 1 ;
+      sh:name "has observation feature" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+demonstrator:State
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "State" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path demonstrator:hasCondition ;
+      sh:class demonstrator:Condition ;
+      sh:minCount 1 ;
+      sh:name "has condition" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path demonstrator:isTargetState ;
+      sh:datatype xsd:boolean ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "is target state" ;
+    ] ;
+.
+demonstrator:StefanBusnatu
+  rdf:type demonstrator:Cardiologist ;
+  demonstrator:treatsPatient demonstrator:JonDoe ;
+  rdfs:label "Stefan busnatu" ;
+.
+demonstrator:Stroke
+  rdf:type demonstrator:Disease ;
+  rdfs:label "Stroke" ;
+.
+demonstrator:SystolicValue
+  rdf:type demonstrator:ObservationFeature ;
+  demonstrator:featureType demonstrator:Numerical ;
+  demonstrator:hasRangeEnd "190"^^xsd:decimal ;
+  demonstrator:hasRangeStart "70"^^xsd:decimal ;
+  demonstrator:hasUnit "mmHg" ;
+  rdfs:label "Systolic value" ;
+.
+demonstrator:Underweight
+  rdf:type demonstrator:State ;
+  demonstrator:hasCondition demonstrator:UnderweightCondition ;
+  demonstrator:isTargetState "false"^^xsd:boolean ;
+  rdfs:label "Underweight" ;
+.
+demonstrator:UnderweightCondition
+  rdf:type demonstrator:Condition ;
+  demonstrator:hasConditionExpression "BMI: < 18.5" ;
+  demonstrator:hasObservationFeature demonstrator:BMI ;
+  rdfs:label "Underweight condition" ;
+.
+demonstrator:Walking
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBMI ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  demonstrator:hasEffect demonstrator:IncreaseBloodPressure ;
+  demonstrator:hasEffect demonstrator:IncreaseBodyTemperature ;
+  rdfs:label "Walking" ;
+.
+demonstrator:WatchingTV
+  rdf:type demonstrator:Activity ;
+  demonstrator:hasEffect demonstrator:DecreaseBloodPressure ;
+  demonstrator:hasEffect demonstrator:DecreaseBodyTemperature ;
+  demonstrator:hasEffect demonstrator:DecreaseHR ;
+  rdfs:label "Watching TV" ;
+.
