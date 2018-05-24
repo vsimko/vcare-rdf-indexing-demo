@@ -1,0 +1,15 @@
+{
+  "name": "timeline-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Viliam Simko",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "graphql-yoga": "^1.14.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

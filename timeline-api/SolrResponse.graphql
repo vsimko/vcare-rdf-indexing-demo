@@ -1,0 +1,33 @@
+type SolrResponse {
+  responseHeader: SolrResponse_header!
+  response: SolrResponse_response
+  highlighting: JSON
+  facet_counts: SolrResponse_facets
+  error: SolrResponse_error
+}
+
+type SolrResponse_facets {
+  facet_queries: JSON!
+  facet_fields: JSON!
+  facet_ranges: JSON!
+  facet_intervals: JSON!
+  facet_heatmaps: JSON!
+}
+
+type SolrResponse_header {
+  status: Int
+  QTime: Int
+  params: JSON!
+}
+
+type SolrResponse_error {
+  metadata: [String]!
+  msg: String!
+  code: Int!
+}
+
+type SolrResponse_response {
+  numFound: Int!
+  start: Int!
+  docs: JSON!
+}
