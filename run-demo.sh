@@ -50,10 +50,10 @@ sudo yarn
 sudo nohup node ./index.js &
 #sudo yarn start
 # Start Demo Query (Timeline)
-echo "---Making Timeline Query.---"
-cd ../demo-timeline-query
-sudo ./run.sh
+#echo "---Making Timeline Query.---"
+#cd ../demo-timeline-query
+#sudo ./run.sh
 # Start Demo Query (Indexed Data)
-echo "----Making GraphData query----"
-cd ../demo-idxdata-query
-sudo ./run.sh
+#echo "----Making GraphData query----"
+#cd ../demo-idxdata-query
+#sudo ./run.sh

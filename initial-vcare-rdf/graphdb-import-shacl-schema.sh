@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copy SHACL Shapes into web directory
+sudo cp ./demonstrator.shapes.ttl /var/www/html
+
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
    "data": "http://localhost/demonstrator.shapes.ttl",
    "name": "demonstrator.shapes.ttl",

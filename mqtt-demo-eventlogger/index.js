@@ -2,7 +2,7 @@
 
 const mqtt = require('mqtt')
 //const client = mqtt.connect('mqtt://test.mosquitto.org/')
-const client = mqtt.connect('mqtt://localhost:1883')
+const client = mqtt.connect('mqtt://localhost:1883/')
 const axios = require('axios')
 const url = "http://localhost:4000"
 
