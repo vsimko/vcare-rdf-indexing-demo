@@ -1,3 +1,3 @@
 #!/bin/sh
 
-curl http://localhost:1234/select?q=*:*
+curl 'http://localhost:8983/solr/knowledgegraph/select?q=*:*'
