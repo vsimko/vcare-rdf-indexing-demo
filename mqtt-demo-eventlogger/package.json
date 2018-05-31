@@ -2,5 +2,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mqtt": "^2.18.0"
-  }
+  },
+  "scripts": {
+   "start": "node index.js",
+   "bla":"echo hello"
+ }
 }

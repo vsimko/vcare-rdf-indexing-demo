@@ -32,10 +32,10 @@ services:
 #      - ./mqtt/data:/mosquitto/data
 #      - ./mqtt/log:/mosquitto/log
 
-  graphdb:
-    image: ontotext/graphdb:8.0.4-se
-    container_name: vcare-graphdb
-    ports:
-      - 7200:7200
-    volumes:
-      - ./graphdb-home:/opt/graphdb/home
+#  graphdb:
+ #   image: ontotext/graphdb:8.0.4-se
+  #  container_name: vcare-graphdb
+   # ports:
+    #  - 7200:7200
+   # volumes:
+    #  - ./graphdb-home:/opt/graphdb/home

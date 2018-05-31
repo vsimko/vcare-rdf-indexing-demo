@@ -6,6 +6,7 @@ help:
 	@echo "  - down:    stop and remove all docker containers"
 	@echo "  - ps:      show all running containers"
 	@echo "  - clean:   remove all dirs"
+	@echo "  - create:  create a solr core for graphdb indexing"
 	@echo
 
 prepare:
@@ -20,6 +21,9 @@ clean:
 up: start
 start:
 	docker-compose up -d
+
+create: 
+	docker-compose exec solr /opt/solr/bin/solr create_core -c  knowledgegraph
 
 down:
 	docker-compose down

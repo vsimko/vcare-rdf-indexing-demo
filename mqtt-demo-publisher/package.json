@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "mqtt": "^2.16.0"
+  },
+  "scripts":{
+    "start":"node index.js"
   }
 }
