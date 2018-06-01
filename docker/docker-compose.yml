@@ -17,19 +17,17 @@ services:
   mqtt:
     image: eclipse-mosquitto:latest
     container_name: vcare-mqtt
-    #restart: always
     ports:
       - "1883:1883"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-#      - ./mqtt/config:/mosquitto/config
-#      - ./mqtt/data:/mosquitto/data
-#      - ./mqtt/log:/mosquitto/log
 
-#  graphdb:
- #   image: ontotext/graphdb:8.0.4-se
-  #  container_name: vcare-graphdb
-   # ports:
-    #  - 7200:7200
-   # volumes:
-    #  - ./graphdb-home:/opt/graphdb/home
+  # see also https://github.com/lyrasis/docker-blazegraph
+  blaze:
+    image: lyrasis/blazegraph:2.1.4
+    container_name: vcare-blaze
+    ports:
+     - "8889:8080"
+    volumes:
+      - ./blaze-data:/data
+#      - ./RWStore.properties:/RWStore.properties
