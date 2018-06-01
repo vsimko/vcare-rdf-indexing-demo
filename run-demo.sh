@@ -1,24 +1,52 @@
 #!/bin/bash
-cd graphdb-free/bin
-./graphdb &
 
-cd ../../docker
-echo "Starting MQTT, GraphDB and SOLR!"
-sudo make prepare
-sudo make start
-sudo make ps
-#wait  5
-echo "Creating a GraphDB Core in Solr"
-sudo make create
+echo_yellow() {
+    echo -e "\e[93m$@\e[39m"
+}
 
-echo "Validating SHACL Schema"
-cd ../shacl-validator
-echo "First we validate a valid and conform SHACL Schema"
-make prepare
-make test
-#echo "Now we validate an invalid SHACL Schema"
-#make test2
-#make clean
+waitport() {
+    PORT="$1"
+    NAME="$2"
+    echo -n -e "Waiting for \e[93m$NAME\e[39m on port \e[93m$PORT\e[39m"
+
+    while ! timeout 1 echo 2>/dev/null > /dev/tcp/localhost/$PORT; do
+        echo -n '.'
+        sleep 0.4
+    done
+
+    echo -e "\e[32m done \e[39m"
+}
+
+echo_yellow "Starting GraphDB ..."
+(
+    cd graphdb-free/bin
+    ./graphdb &
+)
+
+echo_yellow "Starting MQTT and SOLR! ..."
+make -C docker prepare start
+
+echo_yellow "The following docker services are now running:"
+make -C docker ps
+
+waitport 8983 Solr
+
+echo_yellow "Creating cores in Solr used for GraphDB and Timeline API"
+make -C docker solrcores
+
+echo_yellow "Validating SHACL Schema:"
+(
+    cd shacl-validator
+    make prepare
+
+    echo
+    echo_yellow "Validating SHACL Schema against valid data file..."
+    make demo-valid
+
+    echo
+    echo_yellow "Validating SHACL Schema against invalid data file..."
+    make demo-invalid
+)
 
 cd ../initial-vcare-rdf
 echo "Now we import the valid SHACL Schema into GraphDB"
