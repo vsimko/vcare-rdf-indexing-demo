@@ -12,29 +12,24 @@ INFO() {
     echo -e "\e[93m$@\e[39m"
 }
 
-# helper function
-waitport() {
-    PORT="$1"
-    NAME="$2"
-    echo -n -e "Waiting for \e[93m$NAME\e[39m on port \e[93m$PORT\e[39m ..."
-
-    while ! timeout 1 echo 2>/dev/null > /dev/tcp/localhost/$PORT; do
-        echo -n '.'
-        sleep 0.4
-    done
-
-    echo -e "\e[32m done \e[39m"
-}
-
-# helper function
-waitnamespace() {
-    NS="$1"
-    echo -n -e "Waiting for namespace \e[93m$NS\e[39m in Blazegraph ..."
-    while ! curl -f -s -w ''%{http_code}'' -o /dev/null "http://localhost:8889/bigdata/namespace/$NS/properties" >/dev/null; do
+wait200() {
+    URL="$1"
+    echo -n -e "Waiting for \e[93m$URL\e[39m ..."
+    while ! curl -f -s -w ''%{http_code}'' -o /dev/null "$URL" >/dev/null; do
         echo -n '.'
         sleep 1
     done
     echo -e "\e[32m done \e[39m"
+}
+
+wait_blaze_ns() {
+    NS="$1"
+    wait200 "http://localhost:8889/bigdata/namespace/$NS/properties"
+}
+
+wait_solr_core() {
+    CORE="$1"
+    wait200 "http://localhost:8983/solr/$CORE/admin/ping"
 }
 
 # our script begins here
@@ -49,10 +44,14 @@ make -C docker start
 INFO "The following docker services are now running:"
 make -C docker ps
 
-waitport 8983 Solr && (
+wait200 "http://localhost:8983/solr/"
+(
     INFO "Creating cores in Solr used by RDF store and Timeline API ..."
     make -C docker solrcores
 )
+
+wait_solr_core "knowledgegraph"
+wait_solr_core "timelines"
 
 INFO "Validating SHACL Schema against \e[1mvalid\e[0m data file..."
 make -C shacl-validator demo-valid
@@ -60,7 +59,8 @@ make -C shacl-validator demo-valid
 INFO "Validating SHACL Schema against invalid data file..."
 make -C shacl-validator demo-invalid
 
-waitport 8889 Blazegraph && waitnamespace kb && (
+wait_blaze_ns "kb"
+(
     cd initial-vcare-rdf
     INFO "Importing sample data to Blazegraph"
     ./blazegraph-import.sh demonstrator.shapes.ttl
