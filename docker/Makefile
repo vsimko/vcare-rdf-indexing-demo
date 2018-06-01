@@ -1,10 +1,10 @@
 help:
+	@/bin/echo -e "\n\e[33m Available targets: \e[0m"
+	@grep '^[-a-z]*:.*#' $(MAKEFILE_LIST) \
+	  | sed -r 's/^([-a-z]*):.*# *(.*)/"\1:" "\2"/' \
+	  | xargs printf '  - \e[1m%-12s\e[0m %s\n'
 	@echo
-	@echo "Available targets: $%"
-	@grep '^[a-z]*:.*#' $(MAKEFILE_LIST) \
-	  | sed -r 's/^([[:alpha:]]*):.*# *(.*)/"\1:" "\2"/' \
-	  | xargs printf '  - %-12s %s\n'
-	@echo
+
 
 prepare: # create all dirs
 	mkdir -p graphdb-home
