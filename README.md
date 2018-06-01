@@ -1,24 +1,48 @@
-# bilbao-demonstrator
+# TL;DR
 
-## Running docker containers
+```console
+$ git clone --depth 1 https://github.com/nmerkle/bilbao-demonstrator.git
+$ cd bilbao-demonstrator
+$ ./run-demo.sh
+```
+
+# Prerequisites
+- internet connection
+- docker v17.05
+- docker-compose v1.16
+- node v8.11.2
+- yarn (npm package installed globally using `npm install -g yarn`) v1.7
+- GNU bash v4.3
+- GNU make v4.1
+- pkill
+- curl v7.47
+- unzip v6.0
+
+# Running docker containers only
+
 ```console
 $ cd docker
-$ docker-compose up -d
+$ make start
 ```
-
-You can check that all the docker containers are running:
+Then you can check that all containers are running
 ```console
-$ docker-compose ps
+$ make ps
 ```
 
-The output should contain something like this:
+# Running SHACL validation demo only
+
+```console
+$ cd shacl-validation
+$ make clean prepare
+$ make demo-valid
+$ make demo-invalid
 ```
-IMAGE                       PORTS                    NAMES          ...
-solr:alpine                 0.0.0.0:8983->8983/tcp   vcare-solr     ...
-eclipse-mosquitto:latest    0.0.0.0:1883->1883/tcp   vcare-mqtt     ...
-ontotext/graphdb:8.0.4-se   0.0.0.0:7200->7200/tcp   vcare-graphdb  ...
+
+# Importing data to Blazegraph
+```console
+$ cd initial-vcare-rdf
+$ ./blazegraph-import.sh path/to/file.ttl
 ```
 
 ## Demo Overview
-
 ![](https://docs.google.com/drawings/d/e/2PACX-1vQYE20zYvSbpYUsRmlE70WIobPoB072BQyqtr_wXwppngGyG7UlzlIWGAHPVG0IXZdpVF8m35eYsZCQ/pub?w=907&h=899)
