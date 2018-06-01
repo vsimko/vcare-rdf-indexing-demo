@@ -13,12 +13,6 @@ services:
     volumes:
       - ./solr-data:/opt/solr/server/solr/mycores
 
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - timelines
-
-
   # see also https://hub.docker.com/_/eclipse-mosquitto/
   mqtt:
     image: eclipse-mosquitto:latest
