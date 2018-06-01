@@ -6,6 +6,13 @@ $ cd bilbao-demonstrator
 $ ./run-demo.sh
 ```
 
+# Cleanup
+```console
+$ cd docker
+$ docker-compose down
+```
+... after that, you can safely remove the whole `bilbao-demonstrator`.
+
 # Prerequisites
 - internet connection
 - docker v17.05
