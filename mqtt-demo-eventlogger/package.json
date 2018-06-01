@@ -1,10 +1,13 @@
 {
+  "private": true,
   "dependencies": {
     "axios": "^0.18.0",
     "mqtt": "^2.18.0"
   },
+  "engines": {
+    "node": "v8.11.2"
+  },
   "scripts": {
-   "start": "node index.js",
-   "bla":"echo hello"
+   "start": "node index.js"
  }
 }
