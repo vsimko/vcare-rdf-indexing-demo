@@ -1,0 +1,133 @@
+# baseURI: http://vcare.eu/vcare
+# imports: http://datashapes.org/dash
+# prefix: vcare
+
+@prefix : <http://vcare.eu/vcare#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix resource: <http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vcare: <http://vcare.eu/vcare#> .
+@prefix xhtm: <http://www.w3.org/1999/xhtml> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://vcare.eu/vcare>
+  rdf:type owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+.
+vcare:CKDUrgentReferral
+  rdf:type vcare:State ;
+  vcare:hasPreviousState vcare:UrgentReferralCKD ;
+  vcare:isTargetState "true"^^xsd:boolean ;
+.
+vcare:Condition
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Condition" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path vcare:hasConditionExpression ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path vcare:hasObservationFeature ;
+      sh:class vcare:ObservationFeature ;
+      sh:minCount 1 ;
+      sh:name "has observation feature" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+vcare:FeatureType
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Feature type" ;
+  sh:property [
+      sh:path vcare:hasName ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+vcare:ObservationFeature
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Observation feature" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path vcare:featureType ;
+      sh:class vcare:FeatureType ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path vcare:hasUnit ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path vcare:hasVectorSize ;
+      sh:datatype xsd:integer ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+vcare:State
+  rdf:type rdfs:Class ;
+  rdf:type sh:NodeShape ;
+  sh:property [
+      sh:path vcare:hasCondition ;
+      sh:class vcare:Condition ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path vcare:hasInteractionText ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path vcare:hasRisk ;
+      sh:class vcare:Risk ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path vcare:isTargetState ;
+      sh:datatype xsd:boolean ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+vcare:featureType
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "feature type" ;
+  rdfs:range vcare:FeatureType ;
+.
+vcare:hasCondition
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "has condition" ;
+  rdfs:range vcare:Condition ;
+.
+vcare:hasConditionExpression
+  rdf:type owl:DatatypeProperty ;
+  rdfs:label "has condition expression" ;
+  rdfs:range xsd:string ;
+.
+vcare:hasInteractionText
+  rdf:type owl:DatatypeProperty ;
+  rdfs:label "has interaction text" ;
+  rdfs:range xsd:string ;
+.
+vcare:hasUnit
+  rdf:type owl:DatatypeProperty ;
+  rdfs:label "has unit" ;
+  rdfs:range xsd:string ;
+.
+vcare:isTargetState
+  rdf:type owl:DatatypeProperty ;
+  rdfs:label "is target state" ;
+  rdfs:range xsd:boolean ;
+.

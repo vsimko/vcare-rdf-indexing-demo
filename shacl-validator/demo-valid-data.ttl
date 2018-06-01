@@ -1,0 +1,20 @@
+# baseURI: http://vcare.eu/vcare/demo-valid
+# imports: http://vcare.eu/vcare
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vcare: <http://vcare.eu/vcare#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://vcare.eu/vcare/demo-valid>
+  rdf:type owl:Ontology ;
+  owl:imports <http://vcare.eu/vcare> ;
+.
+
+vcare:CKDUrgentReferral
+  rdf:type vcare:State;
+  vcare:hasPreviousState vcare:UrgentReferralCKD ;
+  vcare:isTargetState true ;
+.

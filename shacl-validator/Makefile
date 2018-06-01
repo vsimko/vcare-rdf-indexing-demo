@@ -1,26 +1,28 @@
-SHACL_VERSION=1.1.0
-SHACL_DIR=shacl-${SHACL_VERSION}
-SHACL_ZIP=shacl-${SHACL_VERSION}-bin.zip
-SHACL_DOWNLOAD_URL=http://central.maven.org/maven2/org/topbraid/shacl/${SHACL_VERSION}/${SHACL_ZIP}
+SHACL_VERSION = 1.1.0
+SHACL_DIR = shacl-${SHACL_VERSION}
+SHACL_ZIP = shacl-${SHACL_VERSION}-bin.zip
+SHACL_DOWNLOAD_URL = http://central.maven.org/maven2/org/topbraid/shacl/${SHACL_VERSION}/${SHACL_ZIP}
 
-TESTFILE=${SHACL_DIR}/demonstrator.shapes.ttl
-TESTFILE_BAD=${SHACL_DIR}/vcare.shapes.ttl
+SHAPES = "demo-shapes.ttl"
+DATA_VALID = "demo-valid-data.ttl"
+DATA_INVALID = "demo-invalid-data.ttl"
+
+RED = GREP_COLORS="sl=01;02;01;31:mt=01;00;01;31"
+GREEN = GREP_COLORS="sl=01;02;01;32:mt=01;00;01;32"
+GREP_VALIDATION = grep -A 3 -B 3 --color=always -e sh:conforms -e sh:resultMessage
 
 help:
+	@/bin/echo -e "\n\e[33m Available targets: \e[0m"
+	@grep '^[-a-z]*:.*#' $(MAKEFILE_LIST) \
+	  | sed -r 's/^([-a-z]*):.*# *(.*)/"\1:" "\2"/' \
+	  | xargs printf '  - \e[1m%-12s\e[0m %s\n'
 	@echo
-	@echo "Available targets:"
-	@echo "  - prepare : downloads, unzips and prepares the binary shacl version"
-	@echo "  - test    : runs validation on a test file downloaded from github"
-	@echo "  - test2   : runs validation on a invalid test file downloaded from github"
-	@echo "  - clean   : removes all temporary files"
-	@echo 
 
-prepare: mkexec
+prepare: mkexec # downloads, unzips and prepares the binary shacl version
 
-clean:
+clean: # removes all temporary files
 	rm -r "${SHACL_DIR}"
 	rm ${SHACL_ZIP}
-	rm ${TESTFILE}
 
 ${SHACL_ZIP}:
 	curl ${SHACL_DOWNLOAD_URL} -L -o ${SHACL_ZIP}
@@ -33,15 +35,12 @@ ${SHACL_DIR}: ${SHACL_ZIP}
 mkexec: ${SHACL_DIR}
 	chmod +x ${SHACL_DIR}/bin/*.sh
 
-test: ${TESTFILE}
-	${SHACL_DIR}/bin/shaclvalidate.sh -datafile ${TESTFILE}
+test: demo-valid demo-invalid
+
+demo-valid: # show validation of a valid data file agains shape file
+	@$(SHACL_DIR)/bin/shaclvalidate.sh -datafile $(DATA_VALID) -shapesfile $(SHAPES) 2> /dev/null \
+	|$(GREEN) $(GREP_VALIDATION)
 	
-test2: ${TESTFILE_BAD}
-	${SHACL_DIR}/bin/shaclvalidate.sh -datafile ${TESTFILE_BAD}
-
-
-${TESTFILE}:
-	curl https://raw.githubusercontent.com/nmerkle/bilbao-demonstrator/master/initial-vcare-rdf/demonstrator.shapes.ttl?token=AI0yBq8N_zRknYi2PtYvLo17r-bNH4yqks5bD-0twA%3D%3D -L -o ${TESTFILE}
-
-${TESTFILE_BAD}:
-	curl https://raw.githubusercontent.com/vcare-project/vcare-models/master/vcare.shapes.ttl -L -o ${TESTFILE_BAD}
+demo-invalid: # runs validation on a invalid test file downloaded from github
+	@${SHACL_DIR}/bin/shaclvalidate.sh -datafile $(DATA_INVALID) -shapesfile $(SHAPES) 2> /dev/null \
+	| $(RED) $(GREP_VALIDATION)
