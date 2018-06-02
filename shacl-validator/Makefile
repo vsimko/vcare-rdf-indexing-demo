@@ -21,8 +21,8 @@ help:
 prepare: mkexec # downloads, unzips and prepares the binary shacl version
 
 clean: # removes all temporary files
-	rm -r "${SHACL_DIR}"
-	rm ${SHACL_ZIP}
+	@if [ -d "$(SHACL_DIR)" ]; then rm -r "$(SHACL_DIR)"; fi
+	@if [ -d "$(SHACL_ZIP)" ]; then rm "$(SHACL_ZIP)"; fi
 
 ${SHACL_ZIP}:
 	curl ${SHACL_DOWNLOAD_URL} -L -o ${SHACL_ZIP}
