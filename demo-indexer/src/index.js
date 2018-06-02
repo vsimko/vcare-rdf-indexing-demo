@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 const blaze = require("blazegraph")({
-    host: 'localhost',
+    host: "localhost",
     port: 8889,
-    namespace: 'kb',
+    namespace: "kb",
 })
 
 const solr = require("solr-client").createClient({
@@ -29,12 +29,16 @@ async function pipeline() {
     })
 
     const docs = results.map(convertSingleResult)
-    
-    solr.add(docs)
-    solr.commit()
+    console.log(`Found ${docs.length} documents in Blazegraph`)
 
-    console.log("done")
+    solr.add(docs, (err, res) => {
+        if (err)
+            console.err(err)
+        else {
+            console.log(res)
+            solr.commit()
+        }
+    })
 }
 
 pipeline()
-

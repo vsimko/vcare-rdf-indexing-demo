@@ -33,10 +33,11 @@ wait_solr_core() {
 }
 
 # our script begins here
-
-INFO "Cleanup and prepare first..."
-make -C docker clean prepare
-make -C shacl-validator clean prepare
+if [ -z $NO_CLEAN ]; then
+    INFO "Cleanup and prepare first..."
+    make -C shacl-validator clean prepare
+    make -C docker clean prepare
+fi
 
 INFO "Starting Docker containers ..."
 make -C docker start
@@ -66,10 +67,12 @@ wait_blaze_ns "kb"
     ./blazegraph-import.sh demonstrator.shapes.ttl
 )
 
-# # # Demo-Indexer - Start Demo-Indexer in order to index GraphDB instances
-# # echo "Indexing now the GraphDB data in knowledgegraph core in Solr"
-# # cd ../demo-indexer/graphdb-indexer
-# # sudo mvn exec:java # -Dexec .mainClass="de.fzi.ipe.wim.vcare.demo.indexer.Indexer"
+INFO "Indexing RDF data in knowledgegraph core in Solr ..."
+(
+    cd demo-indexer
+    yarn
+    yarn start
+)
 
 INFO "Starting Timeline API ..."
 (
