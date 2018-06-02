@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# commandline args
+
+FILE="$1"
+
+# constants
+
+MIME=`xdg-mime query filetype "$FILE"`
+HOST="localhost"
+PORT="8889"
+
+# helper methods
+
 echo_bold() {
     echo -e "\e[1m$@\e[0m"
 }
@@ -8,7 +20,6 @@ echo_red() {
     echo -e "\e[31m$@\e[0m"
 }
 
-
 usage() {
     REASON="$1"
     [ -n "$REASON" ] && echo_red ERROR: $REASON
@@ -16,14 +27,13 @@ usage() {
     exit 1
 }
 
-FILE="$1"
+# checks
+
 [ -z "$FILE" ] && usage "Filename is missing"
 
-MIME=`xdg-mime query filetype "$FILE"`
-HOST="localhost"
-PORT="8889"
-
 [ -z "$MIME" ] && usage "Could not determine mime type"
+
+# program stats here
 
 echo_bold "File to import: $FILE"
 echo_bold "Detected mime type: $MIME"
