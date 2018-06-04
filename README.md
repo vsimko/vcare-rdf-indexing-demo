@@ -1,3 +1,6 @@
+## Demo Overview
+![](https://docs.google.com/drawings/d/e/2PACX-1vQYE20zYvSbpYUsRmlE70WIobPoB072BQyqtr_wXwppngGyG7UlzlIWGAHPVG0IXZdpVF8m35eYsZCQ/pub?w=907&h=899)
+
 # TL;DR
 
 ```console
@@ -51,6 +54,3 @@ $ make demo-invalid
 $ cd initial-vcare-rdf
 $ ./blazegraph-import.sh path/to/file.ttl
 ```
-
-## Demo Overview
-![](https://docs.google.com/drawings/d/e/2PACX-1vQYE20zYvSbpYUsRmlE70WIobPoB072BQyqtr_wXwppngGyG7UlzlIWGAHPVG0IXZdpVF8m35eYsZCQ/pub?w=907&h=899)
