@@ -16,6 +16,15 @@ type Query {
     facet: String
     facet_field: String
   ): SolrResponse
+
+  "Checks availability of Solr."
+  solrPing: JSON
+
+  "Returns last messages from the `timelines` core"
+  lastMessages(
+    topic: String = "*"
+    howmany: Int = 10
+  ): [JSON]!
 }
 
 type Mutation {
