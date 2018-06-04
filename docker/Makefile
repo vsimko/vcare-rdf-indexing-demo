@@ -33,6 +33,9 @@ solrcores: # create solr cores for our demo
 solrshell: # open root shell in the running solr container
 	docker-compose exec -u root solr bash
 
+blazeshell: # open root shell in the running blazegraph container
+	docker-compose exec -u root blaze sh
+
 br-solr: # open Solr web interface in a browser
 	browse http://localhost:8983/solr
 
