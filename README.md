@@ -24,6 +24,7 @@ $ docker-compose down
 - pkill
 - curl v7.47
 - unzip v6.0
+- xdg-mime (for automated mime type)
 
 # Running docker containers only
 
