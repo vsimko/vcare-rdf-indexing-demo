@@ -1,7 +1,6 @@
 {
     "name": "demo-indexer",
     "version": "1.0.0",
-    "main": "src/index.js",
     "author": "Viliam Simko <viliam.simko@gmail.com> (https://github.com/vsimko)",
     "license": "MIT",
     "private": true,
@@ -16,7 +15,9 @@
         "solr-client": "^0.7.0"
     },
     "scripts": {
-        "dev": "node-dev src/index.js",
         "start": "node src/index.js"
+    },
+    "bin": {
+        "demo-indexer":"src/index.js"
     }
 }
