@@ -3,7 +3,7 @@
 function finish {
     echo cleanup...
     pkill -e node
-    exit 1
+    exit
 }
 trap finish EXIT SIGINT SIGTERM
 
@@ -27,7 +27,7 @@ WAIT_USER_INPUT() {
 wait200() {
     URL="$1"
     echo -n -e "Waiting for \e[93m$URL\e[39m ..."
-    while ! curl -f -s -w ''%{http_code}'' -o /dev/null "$URL" >/dev/null; do
+    while ! curl -f -s -o /dev/null "$URL" >/dev/null; do
         echo -n '.'
         sleep 1
     done
@@ -56,6 +56,7 @@ make -C docker start
 
 INFO "The following docker services are now running:"
 make -C docker ps
+WAIT_USER_INPUT
 
 INFO "Creating cores in Solr used by RDF store and Timeline API ..."
 wait200 "http://localhost:8983/solr/"
@@ -119,12 +120,3 @@ echo -e " -\e[1m Blazegraph:   \e[0m http://localhost:8889/bigdata/"
 echo
 
 WAIT_USER_INPUT "Now, we are going to kill all running 'node' instances"
-
-# Start Demo Query (Timeline)
-#echo "---Making Timeline Query.---"
-#cd ../demo-timeline-query
-#sudo ./run.sh
-# Start Demo Query (Indexed Data)
-#echo "----Making GraphData query----"
-#cd ../demo-idxdata-query
-#sudo ./run.sh
