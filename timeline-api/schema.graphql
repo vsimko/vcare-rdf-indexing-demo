@@ -7,17 +7,22 @@ type Query {
   "Just an example message"
   info: String!
 
-  "Queries timeline data from Solr instance"
+  "Queries data from Solr instance"
   solrSelect(
-    q:String!,
+    q: String!
+    core: String = "timelines"
+
     "use 'on' if you want to enable faceted search"
-    facet:String,
-    facet_field:String
+    facet: String
+    facet_field: String
   ): SolrResponse
 }
 
 type Mutation {
 
   "Insert new message into Solr"
-  solrInsert(topic:String!, data:String!): JSON
+  solrInsert(
+    topic: String!
+    data: String!
+  ): JSON
 }

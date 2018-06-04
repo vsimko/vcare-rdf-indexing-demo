@@ -25,7 +25,8 @@ async function pipeline() {
 
     const convertSingleResult = x => ({
         id: x.s.value,
-        label: x.label.value
+        label: x.label.value,
+        entity: "State"
     })
 
     const docs = results.map(convertSingleResult)
@@ -33,7 +34,7 @@ async function pipeline() {
 
     solr.add(docs, (err, res) => {
         if (err)
-            console.err(err)
+            console.error(err)
         else {
             console.log(res)
             solr.commit()
