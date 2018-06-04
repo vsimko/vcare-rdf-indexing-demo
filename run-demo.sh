@@ -9,7 +9,19 @@ trap finish EXIT SIGINT SIGTERM
 
 # helper function
 INFO() {
+    echo
     echo -e "\e[93m$@\e[39m"
+}
+
+WAIT_USER_INPUT() {
+    echo -e "\e[1m\e[96m\e[5m"
+    printf "%0$(tput cols)d"|tr 0 _
+    if [ $# -gt 0 ]; then
+        echo "$@"
+    fi
+    echo "Press ENTER to continue..."
+    echo -e "\e[0m"
+    read
 }
 
 wait200() {
@@ -45,29 +57,33 @@ make -C docker start
 INFO "The following docker services are now running:"
 make -C docker ps
 
+INFO "Creating cores in Solr used by RDF store and Timeline API ..."
 wait200 "http://localhost:8983/solr/"
 (
-    INFO "Creating cores in Solr used by RDF store and Timeline API ..."
     make -C docker solrcores
 )
 
+INFO "Waiting for Solr core to appear online ..."
 wait_solr_core "knowledgegraph"
 wait_solr_core "timelines"
 
 INFO "Validating SHACL Schema against \e[1mvalid\e[0m data file..."
 make -C shacl-validator demo-valid
+WAIT_USER_INPUT
 
 INFO "Validating SHACL Schema against invalid data file..."
 make -C shacl-validator demo-invalid
+WAIT_USER_INPUT
 
+INFO "Importing sample data to Blazegraph"
 wait_blaze_ns "kb"
 (
     cd initial-vcare-rdf
-    INFO "Importing sample data to Blazegraph"
     ./blazegraph-import.sh demonstrator.shapes.ttl
 )
+WAIT_USER_INPUT
 
-INFO "Indexing RDF data in knowledgegraph core in Solr ..."
+INFO "Indexing RDF data in Solr core 'knowledgegraph' ..."
 (
     cd demo-indexer
     yarn
@@ -102,9 +118,7 @@ echo -e " -\e[1m Solr:         \e[0m http://localhost:8983/solr/"
 echo -e " -\e[1m Blazegraph:   \e[0m http://localhost:8889/bigdata/"
 echo
 
-INFO "Press ENTER to kill running instances"
-read
-exit
+WAIT_USER_INPUT "Now, we are going to kill all running 'node' instances"
 
 # Start Demo Query (Timeline)
 #echo "---Making Timeline Query.---"
