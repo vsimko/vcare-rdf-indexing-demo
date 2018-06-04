@@ -32,14 +32,9 @@ async function pipeline() {
     const docs = results.map(convertSingleResult)
     console.log(`Found ${docs.length} documents in Blazegraph`)
 
-    solr.add(docs, (err, res) => {
-        if (err)
-            console.error(err)
-        else {
-            console.log(res)
-            solr.commit()
-        }
-    })
+    // TODO: test sequential processing
+    await solr.addAsync(docs)
+    await solr.commitAsync()
 }
 
 pipeline()
