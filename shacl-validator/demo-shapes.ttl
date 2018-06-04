@@ -2,7 +2,6 @@
 # imports: http://datashapes.org/dash
 # prefix: vcare
 
-@prefix : <http://vcare.eu/vcare#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -19,11 +18,6 @@
 <http://vcare.eu/vcare>
   rdf:type owl:Ontology ;
   owl:imports <http://datashapes.org/dash> ;
-.
-vcare:CKDUrgentReferral
-  rdf:type vcare:State ;
-  vcare:hasPreviousState vcare:UrgentReferralCKD ;
-  vcare:isTargetState "true"^^xsd:boolean ;
 .
 vcare:Condition
   rdf:type rdfs:Class ;
