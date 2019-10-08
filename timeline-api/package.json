@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "0.18.1",
     "graphql-yoga": "1.14.0",
     "solr-client": "^0.7.0"
   },
